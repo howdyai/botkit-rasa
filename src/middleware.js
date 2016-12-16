@@ -42,6 +42,7 @@ module.exports = function(config) {
         hears: function(patterns, message) {
              for (var t = 0; t < patterns.length; t++) {
                if (message.intent == patterns[t]){
+                   debug('rasa intent matched hear pattern', message.intent, patterns[t]);
                    return true;
                }
              }
