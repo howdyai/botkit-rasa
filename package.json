@@ -9,6 +9,7 @@
   "author": "ben@howdy.ai",
   "license": "ISC",
   "dependencies": {
+    "debug": "^2.4.4",
     "request": "^2.79.0"
   }
 }

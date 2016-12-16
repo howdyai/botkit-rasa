@@ -1,4 +1,5 @@
-var request = require('requst');
+var request = require('request');
+var debug = require('debug')('botkit:rasa');
 
 module.exports = function(config) {
 
@@ -13,8 +14,8 @@ module.exports = function(config) {
     var middleware = {
         receive: function(bot, message, next) {
 
+            debug('Sending message to rasa API', message.text);
             request.post(config.rasa_uri + '/parse',{form: {q: message.text }}, function(err, res, body) {
-
                 if (err) {
                     console.error('rasa middleware error:',err);
                 } else {
@@ -27,6 +28,7 @@ module.exports = function(config) {
 
                     // copy the entire payload into the message
                     if (json) {
+                        debug('rasa API payload', json);
                         message.intent = json.intent;
                         message.entities = json.entities;
                     }
